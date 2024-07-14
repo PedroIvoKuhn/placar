@@ -11,7 +11,8 @@ html {
 
 h1 {
     background-color: green;
-    font-size: 6rem;
+    font-size: 30rem;
+    color: white;
 }
 
 body {
@@ -20,23 +21,43 @@ body {
 
 .section {
     height: 100vh;
+
 }
 
 .main-content {
-    position: relative;
-    /*top: -8rem;*/
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: var(--gap);
-    min-height: 100vh;
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    margin: 2vh auto;
+    max-width: 90vw;
+    height: 100vh;
+    align-items: center;
 }
 
-.referees, .averages {
-    display: flex;
-    flex-flow: column wrap;
+.averages {
     justify-content: center;
+    align-items: center;
 }
+
 
 .averages h1 {
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.averages .parcial {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background-color: red;
+}
+
+.averages .parcial h3 {
+    font-size: 6rem;
+    display: flex;
+    justify-content: center;
+}
+
+.averages .parcial h3:nth-child(2) {
+    background-color: blue;
 }
