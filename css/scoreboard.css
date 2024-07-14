@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    background-color: green;
+    font-size: 6rem;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.section {
+    height: 100vh;
+}
+
+.main-content {
+    position: relative;
+    /*top: -8rem;*/
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--gap);
+    min-height: 100vh;
+}
+
+.referees, .averages {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.averages h1 {
+    display: flex;
+}

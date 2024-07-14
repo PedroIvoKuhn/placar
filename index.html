@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placar</title>
+    <script src="./scripts/index.js"></script>
+</head>
+<body>
+    <section>
+        <fieldset>
+                <label for="referee-one">Árbitro 1</label>
+                <input type="text" name="referee-one" id="referee-one">
+                <label for="referee-one">Árbitro 2</label>
+                <input type="text" name="referee-two" id="referee-two">
+                <label for="referee-one">Árbitro 3</label>
+                <input type="text" name="referee-three" id="referee-three">
+            <form id="form">
+                <label for="grade-one">Apresentação</label>
+                <input type="number" name="grade-one" id="grade-one">
+
+                <label for="grade-two">Apresentação</label>
+                <input type="number" name="grade-two" id="grade-two">
+
+                <label for="grade-three">Apresentação</label>
+                <input type="number" name="grade-three" id="grade-three">
+                <br>
+
+                <label for="precision-one">Precisão</label>
+                <input type="number" name="precision-one" id="precision-one">
+
+                <label for="precision-two">Precisão</label>
+                <input type="number" name="precision-two" id="precision-two">
+
+                <label for="precision-three">Precisão</label>
+                <input type="number" name="precision-three" id="precision-three">
+                <br>
+                
+                <input type="submit">
+            </form>
+        </fieldset>
+        <a href="./pages/scoreboard.html" target="_blank">Ver placar</a>
+        <button type="button" onclick="resetInputs()">Reset</button>
+    </section>
+</body>
+</html>
