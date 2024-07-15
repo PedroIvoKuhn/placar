@@ -16,8 +16,16 @@ window.onload = () => {
         e.preventDefault();
 
         const referees = referee1.value + ',' + referee2.value + ',' + referee3.value;
-        const grades = [grade1.value, grade2.value, grade3.value];
-        const accuracies = [precision1.value, precision2.value, precision3.value];
+        const grades = [convertNumber(grade1.value, false), convertNumber(grade2.value, false), convertNumber(grade3.value, false)];
+        if (grades.includes(null)) {
+            alert('Insira um numero entre 0 e 6 para a apresentação.');
+            return;
+        }
+        const accuracies = [convertNumber(precision1.value, true), convertNumber(precision2.value, true), convertNumber(precision3.value, true)];
+        if (accuracies.includes(null)) {
+            alert('Insira um numero entre 0 e 4 para a precisão.');
+            return;
+        }
         
         localStorage.setItem('referees', referees);
         localStorage.setItem('grades', grades);
@@ -27,6 +35,23 @@ window.onload = () => {
 
     
 };
+
+function convertNumber(number, precision) {
+    const value = number.replace(',', '.');
+    const numValue = parseFloat(value);
+    if (precision) {
+        if (isNaN(numValue) || numValue < 0 || numValue > 4) {
+            return null;
+        } else {
+            return numValue;
+        }
+    }
+    if (isNaN(numValue) || numValue < 0 || numValue > 6) {
+        return null;
+    } else {
+        return numValue;
+    }
+}
 
 function resetInputs() {
     document.getElementById('grade-one').value = '';

@@ -2,26 +2,25 @@ window.onload = () => {
     const score = document.getElementById('score');
     const accuracyAvg = document.getElementById('accuracyAvg');
     const gradeAvg = document.getElementById('gradeAvg');
-    const ul = document.getElementById('referees');
+    const div = document.getElementById('referees');
 
-    setInterval(() => {show(score, accuracyAvg, gradeAvg, ul)}, 1000);
+    setInterval(() => {show(score, accuracyAvg, gradeAvg, div)}, 1000);
 }
 
 function averageArray(stringArray) {
-    const numArray = stringArray.map(str => parseInt(str, 10));
+    const numArray = stringArray.map(str => parseFloat(str, 10));
     const sumArray = numArray.reduce((i, currentValue) => i + currentValue);
     const avg = sumArray / numArray.length;
     return avg.toFixed(2);
 }
 
-function average(number1, number2) {
-    return ((parseFloat(number1) + parseFloat(number2)) / 2).toFixed(2);
+function sum(number1, number2) {
+    return ((parseFloat(number1) + parseFloat(number2))).toFixed(2);
 }
 
 let calculated = false;
-function show(score, accuracyAvg, gradeAvg, ul) {
+function show(score, accuracyAvg, gradeAvg, div) {
     if (Boolean(localStorage.getItem('show'))) {
-        let avgf = 0;
         if (!calculated) {
             const refereesArray = localStorage.getItem("referees").split(',');
             const gradesArray = localStorage.getItem("grades").split(',');
@@ -30,34 +29,37 @@ function show(score, accuracyAvg, gradeAvg, ul) {
             const avgGrades = averageArray(gradesArray);
             const avgAccuracies = averageArray(accuraciesArray);
             
-            let div = document.createElement('div');
-            div.id = "tempReferees";
+            let ul = document.createElement('ul');
+            ul.id = "tempReferees";
+            ul.className = "tempReferees"
             for (let index = 0; index < refereesArray.length; index++) {
                 const referee = refereesArray[index];
                 const grade = gradesArray[index];
                 const accuracy = accuraciesArray[index];
                 let newReferee = document.createElement('il');
                 newReferee.className = 'referee';
-                newReferee.textContent = `${referee}`;
-                let newGrade = document.createElement('span');
-                newGrade.className = 'grade';
-                newGrade.textContent = `${grade}`;
-                newReferee.appendChild(newGrade);
-                let newAcc = document.createElement('span');
-                newAcc.className = 'accuracy';
+                let name = document.createElement('p');
+                name.className = 'name grid-item';
+                name.textContent = `${referee}`;
+                newReferee.appendChild(name);
+                let newAcc = document.createElement('p');
+                newAcc.className = 'accuracy grid-item';
                 newAcc.textContent = `${accuracy}`;
                 newReferee.appendChild(newAcc);
+                let newGrade = document.createElement('p');
+                newGrade.className = 'grade grid-item';
+                newGrade.textContent = `${grade}`;
+                newReferee.appendChild(newGrade);
 
-                div.appendChild(newReferee);
+                ul.appendChild(newReferee);
             }
-            ul.appendChild(div);
+            div.appendChild(ul);
 
-            score.innerHTML = `${average(avgAccuracies, avgGrades)}`;
+            score.innerHTML = `${sum(avgAccuracies, avgGrades)}`;
             accuracyAvg.innerHTML = `${avgAccuracies}`;
             gradeAvg.innerHTML = `${avgGrades}`;
             
             calculated = true;
-            //console.log("calculado", avg, sum, grades);
         }
         console.log("foi");
     } else {
