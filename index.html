@@ -5,41 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placar</title>
     <script src="./scripts/index.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section>
-        <fieldset>
+    <section class="section">
+        <div class="competitor">
+            <label for="competitor">Competidor</label>
+            <input type="text" name="competitor" id="competitor">
+        </div>
+        <fieldset class="grades">
+            <div class="referees">
                 <label for="referee-one">Árbitro 1</label>
                 <input type="text" name="referee-one" id="referee-one">
                 <label for="referee-one">Árbitro 2</label>
                 <input type="text" name="referee-two" id="referee-two">
                 <label for="referee-one">Árbitro 3</label>
                 <input type="text" name="referee-three" id="referee-three">
-            <form id="form">
-                <label for="grade-one">Apresentação</label>
-                <input type="text" name="grade-one" id="grade-one">
+            </div>
 
-                <label for="grade-two">Apresentação</label>
-                <input type="text" name="grade-two" id="grade-two">
-
-                <label for="grade-three">Apresentação</label>
-                <input type="text" name="grade-three" id="grade-three">
-                <br>
-
-                <label for="precision-one">Precisão</label>
-                <input type="text" name="precision-one" id="precision-one">
-
-                <label for="precision-two">Precisão</label>
-                <input type="text" name="precision-two" id="precision-two">
-
-                <label for="precision-three">Precisão</label>
-                <input type="text" name="precision-three" id="precision-three">
-                <br>
-                
-                <input type="submit">
+            <form id="form" class="form">
+                <div class="grade">
+                    <div>
+                        <label for="precision-one">Precisão</label>
+                        <input type="text" name="precision-one" id="precision-one">
+                    </div>
+                    <div>
+                        <label for="grade-one">Apresentação</label>
+                        <input type="text" name="grade-one" id="grade-one">
+                    </div>
+                </div>
+                <div class="grade">
+                    <div>
+                        <label for="precision-two">Precisão</label>
+                        <input type="text" name="precision-two" id="precision-two">   
+                    </div>             
+                    <div>
+                        <label for="grade-two">Apresentação</label>
+                        <input type="text" name="grade-two" id="grade-two">
+                    </div>
+                </div>
+                <div class="grade">
+                    <div>
+                        <label for="precision-three">Precisão</label>
+                        <input type="text" name="precision-three" id="precision-three">
+                    </div>
+                    <div>
+                        <label for="grade-three">Apresentação</label>
+                        <input type="text" name="grade-three" id="grade-three">
+                    </div>
+                </div>
             </form>
         </fieldset>
-        <a href="./pages/scoreboard.html" target="_blank">Ver placar</a>
+        <button type="submit" form="form">Enviar</button>
+        <button><a href="./pages/scoreboard.html" target="_blank">Ver placar</a></button>
         <button type="button" onclick="resetInputs()">Reset</button>
     </section>
 </body>

@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    background-color: #59656F;
+}
+
+body {
+    font-family: Inter;
+}
+
+fieldset {
+    border: none;
+}
+
+input {
+    background-color: #1E1E1E;
+    border-radius: 30px;
+    height: 8rem;
+    color: white;
+    font-size: 2.9rem;
+    border: none;
+    padding-left: 2rem;
+}
+
+label {
+    padding-top: 2rem;
+    padding-left: 2rem;
+    font-size: 2.3rem;
+}
+
+.section {
+    height: 100vh;
+}
+
+.competitor, .grade div {
+    display: grid;
+    justify-content: center;
+}
+
+.competitor input{
+    width: 30vw;
+}
+
+.grades {
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+    align-items: center;
+}
+
+.referees, .form{
+    display: grid;
+    margin: 10vh; 
+}
+
+.grade{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
