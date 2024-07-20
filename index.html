@@ -57,9 +57,13 @@
                 </div>
             </form>
         </fieldset>
-        <button type="submit" form="form">Enviar</button>
-        <button><a href="./pages/scoreboard.html" target="_blank">Ver placar</a></button>
-        <button type="button" onclick="resetInputs()">Reset</button>
+        <div class="actions">
+            <a href="./pages/scoreboard.html" target="_blank" class="button">Placar</a>
+            <div>
+                <button id="reset" type="button" onclick="resetInputs()">Reset</button>
+                <button id="submit" type="submit" form="form">Enviar</button>
+            </div>
+        </div>
     </section>
 </body>
 </html>

@@ -19,6 +19,7 @@ function sum(number1, number2) {
 }
 
 let calculated = false;
+let isNotShowing = false;
 function show(score, accuracyAvg, gradeAvg, div) {
     if (Boolean(localStorage.getItem('show'))) {
         if (!calculated) {
@@ -32,6 +33,10 @@ function show(score, accuracyAvg, gradeAvg, div) {
             let ul = document.createElement('ul');
             ul.id = "tempReferees";
             ul.className = "tempReferees"
+            const competitor = document.createElement('il');
+            competitor.textContent = localStorage.getItem("competitor");
+            competitor.className = 'competitor grid-item';
+            ul.appendChild(competitor);
             for (let index = 0; index < refereesArray.length; index++) {
                 const referee = refereesArray[index];
                 const grade = gradesArray[index];
@@ -60,18 +65,21 @@ function show(score, accuracyAvg, gradeAvg, div) {
             gradeAvg.innerHTML = `${avgGrades}`;
             
             calculated = true;
+            isNotShowing = false;
+            console.log("foi");
         }
-        console.log("foi");
     } else {
         calculated = false;
         const div = document.getElementById("tempReferees");
         if (div) {
           div.remove();  
         }
-    
-        score.innerHTML = "-";
-        accuracyAvg.innerHTML = `-`;
-        gradeAvg.innerHTML = `-`;
-        console.log('agora não');
+        if (!isNotShowing) {
+            score.innerHTML = "-";
+            accuracyAvg.innerHTML = `-`;
+            gradeAvg.innerHTML = `-`;
+            isNotShowing = true;
+            console.log('agora não');
+        }
     }
 };

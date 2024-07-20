@@ -12,6 +12,8 @@ window.onload = () => {
     const precision2 = document.getElementById('precision-two');
     const precision3 = document.getElementById('precision-three');
 
+    const competitor = document.getElementById('competitor');
+
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
 
@@ -27,10 +29,13 @@ window.onload = () => {
             return;
         }
         
+        document.getElementById("submit").disabled = true;
+        document.getElementById("reset").disabled = false;
         localStorage.setItem('referees', referees);
         localStorage.setItem('grades', grades);
         localStorage.setItem('accuracies', accuracies);
         localStorage.setItem('show', true);
+        localStorage.setItem('competitor', competitor.value);
     });
 
     
@@ -60,5 +65,16 @@ function resetInputs() {
     document.getElementById('precision-one').value = '';
     document.getElementById('precision-two').value = '';
     document.getElementById('precision-three').value = '';
-    localStorage.setItem('show', '');   
+    document.getElementById('competitor').value = '';
+    localStorage.setItem('show', '');
+    document.getElementById("submit").disabled = false;
+    document.getElementById("reset").disabled = true;
 }
+
+window.addEventListener('beforeunload', (e) =>{
+    localStorage.removeItem('referees');
+    localStorage.removeItem('grades');
+    localStorage.removeItem('accuracies');
+    localStorage.removeItem('show');
+    localStorage.removeItem('competitor');
+})

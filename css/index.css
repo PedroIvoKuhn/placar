@@ -24,7 +24,6 @@ input {
     height: 8rem;
     color: white;
     font-size: 2.9rem;
-    border: none;
     padding-left: 2rem;
 }
 
@@ -32,6 +31,28 @@ label {
     padding-top: 2rem;
     padding-left: 2rem;
     font-size: 2.3rem;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+button, 
+.button {
+    height: 8rem;
+    width: 20%;
+    background-color: #1E1E1E;
+    border-radius: 30px;
+    color: white;
+    font-size: 2.9rem;
+    transition: all 300ms ease-in-out;
+}
+
+button:hover,
+.button:hover {
+    cursor: pointer;
+    background-color: #3d3d3d;
 }
 
 .section {
@@ -61,4 +82,44 @@ label {
 .grade{
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5vw;
+}
+
+.actions > button {
+    margin-left: 5vw;
+}
+
+.actions div {
+    width: 40%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 2rem;
+}
+
+.actions button:last-child {
+    width: 40%;
+    align-items: center;
+}
+
+.actions button:first-child {
+    height: 50%;
+}
+
+.button {
+    padding: 2rem;
+    text-align: center;
+}
+
+button:disabled{
+    cursor: auto;
+    background-color: #3d3d3d;
+    color: rgb(126, 126, 126)
 }
