@@ -28,7 +28,6 @@ input {
 }
 
 label {
-    padding-top: 2rem;
     padding-left: 2rem;
     font-size: 2.3rem;
 }
@@ -60,6 +59,7 @@ button:hover,
 }
 
 .competitor, .grade div {
+    height: 10vh;
     display: grid;
     justify-content: center;
 }
@@ -72,11 +72,21 @@ button:hover,
     display: grid;
     grid-template-columns: .5fr 1fr;
     align-items: center;
+    height: 70vh;
 }
 
 .referees, .form{
     display: grid;
-    margin: 10vh; 
+    margin: 0 5vw;
+}
+
+.grade div {
+    margin-top: 5%;
+}
+
+.referees label,
+.competitor label {
+    padding-top: 5%;
 }
 
 .grade{
@@ -88,7 +98,7 @@ button:hover,
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 5vw;
+    padding: 0 5vw;
 }
 
 .actions > button {
