@@ -21,10 +21,10 @@ fieldset {
 input {
     background-color: #1E1E1E;
     border-radius: 30px;
-    height: 8rem;
     color: white;
     font-size: 2.9rem;
     padding-left: 2rem;
+    height: 7vh;
 }
 
 label {
@@ -84,9 +84,12 @@ button:hover,
     margin-top: 5%;
 }
 
-.referees label,
-.competitor label {
+.referees label{
     padding-top: 5%;
+}
+
+.competitor {
+    margin-top: 2vh;
 }
 
 .grade{
