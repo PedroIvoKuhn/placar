@@ -45,7 +45,7 @@ function show(score, accuracyAvg, gradeAvg, div) {
                 newReferee.className = 'referee';
                 let name = document.createElement('p');
                 name.className = 'name grid-item';
-                name.textContent = `${referee}`;
+                name.textContent = `${index+1}`;
                 newReferee.appendChild(name);
                 let newAcc = document.createElement('p');
                 newAcc.className = 'accuracy grid-item';
@@ -63,6 +63,8 @@ function show(score, accuracyAvg, gradeAvg, div) {
             score.innerHTML = `${sum(avgAccuracies, avgGrades)}`;
             accuracyAvg.innerHTML = `${avgAccuracies}`;
             gradeAvg.innerHTML = `${avgGrades}`;
+
+            localStorage.setItem('result', avgAccuracies + ',' + avgGrades + ',' +sum(avgAccuracies, avgGrades));
             
             calculated = true;
             isNotShowing = false;
@@ -78,6 +80,7 @@ function show(score, accuracyAvg, gradeAvg, div) {
             score.innerHTML = "-";
             accuracyAvg.innerHTML = `-`;
             gradeAvg.innerHTML = `-`;
+            localStorage.removeItem('result');
             isNotShowing = true;
             console.log('agora não');
         }

@@ -14,6 +14,8 @@ window.onload = () => {
 
     const competitor = document.getElementById('competitor');
 
+    setInterval(() => {result()}, 1000);
+
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
 
@@ -40,6 +42,26 @@ window.onload = () => {
 
     
 };
+
+let shown = false
+function result() {
+    let result = localStorage.getItem('result');
+    if (result != null) {
+        if (!shown) {        
+            const temp = document.getElementById('result');
+            result = result.split(',');
+            result.forEach(element => {
+                const span = document.createElement('span');
+                span.id = 'tempResult';
+                span.textContent = `${element}`;
+                temp.appendChild(span);
+            });
+            shown = true;
+        }
+        return
+    }
+    shown = false;
+}
 
 function convertNumber(number, precision) {
     const value = number.replace(',', '.');
@@ -69,6 +91,8 @@ function resetInputs() {
     localStorage.setItem('show', '');
     document.getElementById("submit").disabled = false;
     document.getElementById("reset").disabled = true;
+    const p = document.getElementById("result");
+    p.innerHTML = "Resultado:";
 }
 
 window.addEventListener('beforeunload', (e) =>{
