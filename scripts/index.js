@@ -18,8 +18,8 @@ window.onload = () => {
 
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
-
-        const referees = referee1.value + ',' + referee2.value + ',' + referee3.value;
+        
+        const referees = `${referee1.value},${referee2.value},${referee3.value}`
         const grades = [convertNumber(grade1.value, false), convertNumber(grade2.value, false), convertNumber(grade3.value, false)];
         if (grades.includes(null)) {
             alert('Insira um numero entre 0 e 6 para a apresentação.');

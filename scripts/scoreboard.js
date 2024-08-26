@@ -64,7 +64,7 @@ function show(score, accuracyAvg, gradeAvg, div) {
             accuracyAvg.innerHTML = `${avgAccuracies}`;
             gradeAvg.innerHTML = `${avgGrades}`;
 
-            localStorage.setItem('result', avgAccuracies + ',' + avgGrades + ',' +sum(avgAccuracies, avgGrades));
+            localStorage.setItem('result', `${avgAccuracies},${avgGrades},${sum(avgAccuracies, avgGrades)}`);
             
             calculated = true;
             isNotShowing = false;
