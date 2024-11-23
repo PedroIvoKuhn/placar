@@ -19,7 +19,7 @@ window.onload = () => {
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
         
-        const referees = `${referee1.value},${referee2.value},${referee3.value}`
+        const referees = `${referee1.value},${referee2.value},${referee3.value}`;        
         const grades = [convertNumber(grade1.value, false), convertNumber(grade2.value, false), convertNumber(grade3.value, false)];
         if (grades.includes(null)) {
             alert('Insira um numero entre 0 e 6 para a apresentação.');
@@ -66,14 +66,15 @@ function result() {
 function convertNumber(number, precision) {
     const value = number.replace(',', '.');
     const numValue = parseFloat(value);
+    if (isNaN(numValue)) return "-";
     if (precision) {
-        if (isNaN(numValue) || numValue < 0 || numValue > 4) {
+        if (numValue < 0 || numValue > 4) {
             return null;
         } else {
             return numValue;
         }
     }
-    if (isNaN(numValue) || numValue < 0 || numValue > 6) {
+    if (numValue < 0 || numValue > 6) {
         return null;
     } else {
         return numValue;

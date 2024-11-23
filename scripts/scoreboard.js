@@ -9,8 +9,9 @@ window.onload = () => {
 
 function averageArray(stringArray) {
     const numArray = stringArray.map(str => parseFloat(str, 10));
-    const sumArray = numArray.reduce((i, currentValue) => i + currentValue);
-    const avg = sumArray / numArray.length;
+    const validNumbers = numArray.filter(num => !isNaN(num));
+    const sumArray = validNumbers.reduce((i, currentValue) => i + currentValue);
+    const avg = sumArray / validNumbers.length;
     return avg.toFixed(2);
 }
 
