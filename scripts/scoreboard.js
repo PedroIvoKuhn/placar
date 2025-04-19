@@ -24,48 +24,47 @@ let isNotShowing = false;
 function show(score, accuracyAvg, gradeAvg, div) {
     if (Boolean(localStorage.getItem('show'))) {
         if (!calculated) {
-            const refereesArray = localStorage.getItem("referees").split(',');
-            const gradesArray = localStorage.getItem("gradesPrecisions").split(',');
-            const accuraciesArray = localStorage.getItem("accuracies").split(',');
+            const gradesPrecision = localStorage.getItem("gradesPrecision").split(',');
+            const accuraciesApresentation = localStorage.getItem("accuraciesApresentation").split(',');
         
-            const avgGrades = averageArray(gradesArray);
-            const avgAccuracies = averageArray(accuraciesArray);
-            
+            const avgPrecision = averageArray(gradesPrecision);
+            const avgApresentation = averageArray(accuraciesApresentation);
+        
             let ul = document.createElement('ul');
             ul.id = "tempReferees";
             ul.className = "tempReferees"
-            const competitor = document.createElement('il');
-            competitor.textContent = localStorage.getItem("competitor");
-            competitor.className = 'competitor grid-item';
+                const competitor = document.createElement('il');
+                competitor.textContent = localStorage.getItem("competitor");
+                competitor.className = 'competitor grid-item';
             ul.appendChild(competitor);
-            for (let index = 0; index < refereesArray.length; index++) {
-                const referee = refereesArray[index];
-                const grade = gradesArray[index];
-                const accuracy = accuraciesArray[index];
+
+            for (let index = 0; index < parseInt(localStorage.getItem('arbitros')); index++) {
+                const gradePrecision = gradesPrecision[index];
+                const accuracyApresentation = accuraciesApresentation[index];
                 let newReferee = document.createElement('il');
-                newReferee.className = 'referee';
-                let name = document.createElement('p');
-                name.className = 'name grid-item';
-                name.textContent = `${index+1}`;
+                    newReferee.className = 'referee';
+                    let name = document.createElement('p');
+                    name.className = 'name grid-item';
+                    name.textContent = `${index+1}`;
                 newReferee.appendChild(name);
-                let newAcc = document.createElement('p');
-                newAcc.className = 'accuracy grid-item';
-                newAcc.textContent = `${accuracy}`;
-                newReferee.appendChild(newAcc);
-                let newGrade = document.createElement('p');
-                newGrade.className = 'grade grid-item';
-                newGrade.textContent = `${grade}`;
-                newReferee.appendChild(newGrade);
+                    let newAccApresentation = document.createElement('p');
+                    newAccApresentation.className = 'accuracy grid-item';
+                    newAccApresentation.textContent = `${accuracyApresentation}`;
+                newReferee.appendChild(newAccApresentation);
+                    let newGradePrecision = document.createElement('p');
+                    newGradePrecision.className = 'grade grid-item';
+                    newGradePrecision.textContent = `${gradePrecision}`;
+                newReferee.appendChild(newGradePrecision);
 
                 ul.appendChild(newReferee);
             }
             div.appendChild(ul);
 
-            score.innerHTML = `${sum(avgAccuracies, avgGrades)}`;
-            accuracyAvg.innerHTML = `${avgAccuracies}`;
-            gradeAvg.innerHTML = `${avgGrades}`;
+            score.innerHTML = `${sum(avgApresentation, avgPrecision)}`;
+            accuracyAvg.innerHTML = `${avgApresentation}`;
+            gradeAvg.innerHTML = `${avgPrecision}`;
 
-            localStorage.setItem('result', `${avgAccuracies},${avgGrades},${sum(avgAccuracies, avgGrades)}`);
+            localStorage.setItem('result', `${avgApresentation},${avgPrecision},${sum(avgApresentation, avgPrecision)}`);
             
             calculated = true;
             isNotShowing = false;

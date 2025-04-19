@@ -57,7 +57,7 @@ window.onload= () => {
     const apresentations = document.querySelectorAll('#apresentation');
     const competitor = document.getElementById('competitor');
     let gradesPrecisions = [];
-    let accuracyApresentation = []
+    let accuraciesApresentation = []
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -67,6 +67,10 @@ window.onload= () => {
             let grade = parseFloat(input.value);
 
             if (!isNaN(grade)){
+                if (grade < 0 || grade > 4){
+                    alert("Insira uma nota entre 0 e 4 para a precisão!");
+                    return;
+                }
                 gradesPrecisions.push(grade);
             } else {
                 gradesPrecisions.push('-');
@@ -77,16 +81,20 @@ window.onload= () => {
             let grade = parseFloat(input.value);
 
             if (!isNaN(grade)){
-                accuracyApresentation.push(grade);
+                if (grade < 0 || grade > 6){
+                    alert("Insira uma nota entre 0 e 6 para a apresentação!");
+                    return
+                }
+                accuraciesApresentation.push(grade);
             } else {
-                accuracyApresentation.push('-');
+                accuraciesApresentation.push('-');
             }
         });
 
         if (numArbitros < 4) {
-            localStorage.setItem('gradesPrecision', accuracyApresentation);
+            localStorage.setItem('accuraciesApresentation', accuraciesApresentation);
             localStorage.setItem('gradesPrecision', gradesPrecisions);
-            accuracyApresentation = [];
+            accuraciesApresentation = [];
             gradesPrecisions = [];
             return;
         }
@@ -94,21 +102,28 @@ window.onload= () => {
         const precisionMaxAndMin = maxAndMin(gradesPrecisions);
         gradesPrecisions.splice(precisionMaxAndMin[0], 1, "X");
         gradesPrecisions.splice(precisionMaxAndMin[1], 1, "X");
-        const apresentationMaxAndMin = maxAndMin(accuracyApresentation);
-        accuracyApresentation.splice(apresentationMaxAndMin[0], 1, "X");
-        accuracyApresentation.splice(apresentationMaxAndMin[1], 1, "X");
+        const apresentationMaxAndMin = maxAndMin(accuraciesApresentation);
+        accuraciesApresentation.splice(apresentationMaxAndMin[0], 1, "X");
+        accuraciesApresentation.splice(apresentationMaxAndMin[1], 1, "X");
         
         localStorage.setItem('gradesPrecision', gradesPrecisions);
-        localStorage.setItem('accuracyApresentation', accuracyApresentation);
+        localStorage.setItem('accuraciesApresentation', accuraciesApresentation);
+        localStorage.setItem('show', true);
         gradesPrecisions = [];
-        accuracyApresentation = [];
+        accuraciesApresentation = [];
     })    
 }
 
 function resetInputs() {
-    localStorage.setItem('gradesPrecision', '');
-    localStorage.setItem('accuracyApresentation', '');
-    localStorage.setItem('competitor', '');
+    const precisions = document.querySelectorAll('#precision');
+    const apresentations = document.querySelectorAll('#apresentation');
+    const competitor = document.getElementById('competitor').value = '';
+    precisions.forEach((input) => input.value = '');
+    apresentations.forEach((input) => input.value = '');
+
+    localStorage.setItem('show', '');
+    document.getElementById("submit").disabled = false;
+    document.getElementById("reset").disabled = true;
     const p = document.getElementById("result");
     p.innerHTML = "Resultado:";
 }
