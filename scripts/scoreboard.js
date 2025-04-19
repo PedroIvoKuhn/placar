@@ -25,7 +25,7 @@ function show(score, accuracyAvg, gradeAvg, div) {
     if (Boolean(localStorage.getItem('show'))) {
         if (!calculated) {
             const refereesArray = localStorage.getItem("referees").split(',');
-            const gradesArray = localStorage.getItem("grades").split(',');
+            const gradesArray = localStorage.getItem("gradesPrecisions").split(',');
             const accuraciesArray = localStorage.getItem("accuracies").split(',');
         
             const avgGrades = averageArray(gradesArray);
