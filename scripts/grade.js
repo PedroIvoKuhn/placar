@@ -43,11 +43,12 @@ function maxAndMin(array) {
     const cleanArray = array.filter(number => !isNaN(number));
     const max = cleanArray.reduce((previous, current) => Math.max(previous, current));
     const min = cleanArray.reduce((previous, current) => Math.min(previous, current));
-    
+
     return [array.findIndex(num => num === max), array.findIndex(num => num === min)];
 }
 
 window.onload= () => {
+    setInterval(() => {result()}, 1000);
     const numArbitros = getNumArbitros();
     generateInputs(numArbitros);
     localStorage.setItem(`arbitros`, numArbitros);
@@ -64,7 +65,7 @@ window.onload= () => {
         localStorage.setItem('competitor', competitor.value);
 
         precisions.forEach((input) => {
-            let grade = parseFloat(input.value);
+            let grade = parseFloat(input.value.replace(',', '.'));
 
             if (!isNaN(grade)){
                 if (grade < 0 || grade > 4){
@@ -78,7 +79,7 @@ window.onload= () => {
         });
 
         apresentations.forEach((input) => {
-            let grade = parseFloat(input.value);
+            let grade = parseFloat(input.value.replace(',', '.'));
 
             if (!isNaN(grade)){
                 if (grade < 0 || grade > 6){
@@ -94,36 +95,80 @@ window.onload= () => {
         if (numArbitros < 4) {
             localStorage.setItem('accuraciesApresentation', accuraciesApresentation);
             localStorage.setItem('gradesPrecision', gradesPrecisions);
+            localStorage.setItem('show', true);
+            document.getElementById("submit").disabled = true;
+            document.getElementById("reset").disabled = false;
             accuraciesApresentation = [];
             gradesPrecisions = [];
             return;
         }
+        if (accuraciesApresentation.length !== gradesPrecisions.length) {
+            accuraciesApresentation = [];
+            gradesPrecisions = [];
+            return
+        }
 
         const precisionMaxAndMin = maxAndMin(gradesPrecisions);
-        gradesPrecisions.splice(precisionMaxAndMin[0], 1, "X");
-        gradesPrecisions.splice(precisionMaxAndMin[1], 1, "X");
         const apresentationMaxAndMin = maxAndMin(accuraciesApresentation);
-        accuraciesApresentation.splice(apresentationMaxAndMin[0], 1, "X");
-        accuraciesApresentation.splice(apresentationMaxAndMin[1], 1, "X");
         
+        localStorage.setItem("precisionMaxAndMin", precisionMaxAndMin);
+        localStorage.setItem("apresentationMaxAndMin", apresentationMaxAndMin);
         localStorage.setItem('gradesPrecision', gradesPrecisions);
         localStorage.setItem('accuraciesApresentation', accuraciesApresentation);
         localStorage.setItem('show', true);
+        document.getElementById("submit").disabled = true;
+        document.getElementById("reset").disabled = false;
+
         gradesPrecisions = [];
         accuraciesApresentation = [];
     })    
 }
 
+let shown = false
+function result() {
+    let result = localStorage.getItem('result');
+    if (result !== null) {
+        if (!shown) {        
+            const temp = document.getElementById('result');
+            result = result.split(',');
+            result.forEach(element => {
+                const span = document.createElement('span');
+                span.id = 'tempResult';
+                span.textContent = `${element}`;
+                temp.appendChild(span);
+            });
+            shown = true;
+        }
+        return
+    }
+    shown = false;
+}
+
 function resetInputs() {
     const precisions = document.querySelectorAll('#precision');
     const apresentations = document.querySelectorAll('#apresentation');
-    const competitor = document.getElementById('competitor').value = '';
     precisions.forEach((input) => input.value = '');
     apresentations.forEach((input) => input.value = '');
-
+    
     localStorage.setItem('show', '');
+    localStorage.setItem('gradesPrecision', '');
+    localStorage.setItem('accuraciesApresentation', '');
+    localStorage.setItem("precisionMaxAndMin", '');
+    localStorage.setItem("apresentationMaxAndMin", '');
     document.getElementById("submit").disabled = false;
     document.getElementById("reset").disabled = true;
+    document.getElementById('competitor').value = '';
     const p = document.getElementById("result");
     p.innerHTML = "Resultado:";
 }
+
+window.addEventListener('beforeunload', (e) =>{
+    localStorage.removeItem('result');
+    localStorage.removeItem('accuraciesApresentation');
+    localStorage.removeItem('gradesPrecision');
+    localStorage.removeItem('show');
+    localStorage.removeItem('competitor');
+    localStorage.removeItem('arbitros');
+    localStorage.removeItem('precisionMaxAndMin');
+    localStorage.removeItem('apresentationMaxAndMin');
+})

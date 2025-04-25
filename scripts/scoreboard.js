@@ -24,11 +24,30 @@ let isNotShowing = false;
 function show(score, accuracyAvg, gradeAvg, div) {
     if (Boolean(localStorage.getItem('show'))) {
         if (!calculated) {
+            const numArbitros = parseInt(localStorage.getItem('arbitros'));
             const gradesPrecision = localStorage.getItem("gradesPrecision").split(',');
             const accuraciesApresentation = localStorage.getItem("accuraciesApresentation").split(',');
+            const precisionMaxAndMin = numArbitros !== 3 ? localStorage.getItem('precisionMaxAndMin').split(',') : null
+            const apresentationMaxAndMin = numArbitros !== 3 ? localStorage.getItem('apresentationMaxAndMin').split(',') : null
+
+            const cleanPrecision = gradesPrecision.filter((grade, index) =>  {
+                if(precisionMaxAndMin){
+                    if (index === parseInt(precisionMaxAndMin[0])) return;
+                    if (index === parseInt(precisionMaxAndMin[1])) return;
+                }
+                return grade;
+            });
         
-            const avgPrecision = averageArray(gradesPrecision);
-            const avgApresentation = averageArray(accuraciesApresentation);
+            const cleanApresentation = accuraciesApresentation.filter((grade, index) => {
+                if(apresentationMaxAndMin){
+                    if (index === parseInt(apresentationMaxAndMin[0])) return;
+                    if (index === parseInt(apresentationMaxAndMin[1])) return;
+                }
+                return grade;
+            })
+            
+            const avgPrecision = averageArray(cleanPrecision);
+            const avgApresentation = averageArray(cleanApresentation);
         
             let ul = document.createElement('ul');
             ul.id = "tempReferees";
@@ -50,10 +69,23 @@ function show(score, accuracyAvg, gradeAvg, div) {
                     let newAccApresentation = document.createElement('p');
                     newAccApresentation.className = 'accuracy grid-item';
                     newAccApresentation.textContent = `${accuracyApresentation}`;
+                    if(apresentationMaxAndMin){
+                        if (index === parseInt(apresentationMaxAndMin[0]) || index === parseInt(apresentationMaxAndMin[1])){
+                            newAccApresentation.className = 'cancel grid-item';
+                            newAccApresentation.style.textDecoration = 'line-through';
+                        }
+                    }
                 newReferee.appendChild(newAccApresentation);
                     let newGradePrecision = document.createElement('p');
                     newGradePrecision.className = 'grade grid-item';
                     newGradePrecision.textContent = `${gradePrecision}`;
+                    if(precisionMaxAndMin){
+                        if (index === parseInt(precisionMaxAndMin[0]) || index === parseInt(precisionMaxAndMin[1])){
+                            newGradePrecision.className = 'cancel grid-item';
+                            newGradePrecision.style.textDecoration = 'line-through';
+                        }
+                    }
+
                 newReferee.appendChild(newGradePrecision);
 
                 ul.appendChild(newReferee);

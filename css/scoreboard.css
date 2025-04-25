@@ -87,6 +87,11 @@ body {
     border-radius: 0;
 }
 
+.referee .cancel{
+    background-color: gray;
+    border-radius: 0;
+}
+
 .score {
     grid-column: span 2;
     background-color: green;
