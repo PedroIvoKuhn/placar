@@ -24,48 +24,79 @@ let isNotShowing = false;
 function show(score, accuracyAvg, gradeAvg, div) {
     if (Boolean(localStorage.getItem('show'))) {
         if (!calculated) {
-            const refereesArray = localStorage.getItem("referees").split(',');
-            const gradesArray = localStorage.getItem("grades").split(',');
-            const accuraciesArray = localStorage.getItem("accuracies").split(',');
+            const numArbitros = parseInt(localStorage.getItem('arbitros'));
+            const gradesPrecision = localStorage.getItem("gradesPrecision").split(',');
+            const accuraciesApresentation = localStorage.getItem("accuraciesApresentation").split(',');
+            const precisionMaxAndMin = numArbitros !== 3 ? localStorage.getItem('precisionMaxAndMin').split(',') : null
+            const apresentationMaxAndMin = numArbitros !== 3 ? localStorage.getItem('apresentationMaxAndMin').split(',') : null
+
+            const cleanPrecision = gradesPrecision.filter((grade, index) =>  {
+                if(precisionMaxAndMin){
+                    if (index === parseInt(precisionMaxAndMin[0])) return;
+                    if (index === parseInt(precisionMaxAndMin[1])) return;
+                }
+                return grade;
+            });
         
-            const avgGrades = averageArray(gradesArray);
-            const avgAccuracies = averageArray(accuraciesArray);
+            const cleanApresentation = accuraciesApresentation.filter((grade, index) => {
+                if(apresentationMaxAndMin){
+                    if (index === parseInt(apresentationMaxAndMin[0])) return;
+                    if (index === parseInt(apresentationMaxAndMin[1])) return;
+                }
+                return grade;
+            })
             
+            const avgPrecision = averageArray(cleanPrecision);
+            const avgApresentation = averageArray(cleanApresentation);
+        
             let ul = document.createElement('ul');
             ul.id = "tempReferees";
             ul.className = "tempReferees"
-            const competitor = document.createElement('il');
-            competitor.textContent = localStorage.getItem("competitor");
-            competitor.className = 'competitor grid-item';
+                const competitor = document.createElement('il');
+                competitor.textContent = localStorage.getItem("competitor");
+                competitor.className = 'competitor grid-item';
             ul.appendChild(competitor);
-            for (let index = 0; index < refereesArray.length; index++) {
-                const referee = refereesArray[index];
-                const grade = gradesArray[index];
-                const accuracy = accuraciesArray[index];
+
+            for (let index = 0; index < parseInt(localStorage.getItem('arbitros')); index++) {
+                const gradePrecision = gradesPrecision[index];
+                const accuracyApresentation = accuraciesApresentation[index];
                 let newReferee = document.createElement('il');
-                newReferee.className = 'referee';
-                let name = document.createElement('p');
-                name.className = 'name grid-item';
-                name.textContent = `${index+1}`;
+                    newReferee.className = 'referee';
+                    let name = document.createElement('p');
+                    name.className = 'name grid-item';
+                    name.textContent = `${index+1}`;
                 newReferee.appendChild(name);
-                let newAcc = document.createElement('p');
-                newAcc.className = 'accuracy grid-item';
-                newAcc.textContent = `${accuracy}`;
-                newReferee.appendChild(newAcc);
-                let newGrade = document.createElement('p');
-                newGrade.className = 'grade grid-item';
-                newGrade.textContent = `${grade}`;
-                newReferee.appendChild(newGrade);
+                    let newAccApresentation = document.createElement('p');
+                    newAccApresentation.className = 'accuracy grid-item';
+                    newAccApresentation.textContent = `${accuracyApresentation}`;
+                    if(apresentationMaxAndMin){
+                        if (index === parseInt(apresentationMaxAndMin[0]) || index === parseInt(apresentationMaxAndMin[1])){
+                            newAccApresentation.className = 'cancel grid-item';
+                            newAccApresentation.style.textDecoration = 'line-through';
+                        }
+                    }
+                newReferee.appendChild(newAccApresentation);
+                    let newGradePrecision = document.createElement('p');
+                    newGradePrecision.className = 'grade grid-item';
+                    newGradePrecision.textContent = `${gradePrecision}`;
+                    if(precisionMaxAndMin){
+                        if (index === parseInt(precisionMaxAndMin[0]) || index === parseInt(precisionMaxAndMin[1])){
+                            newGradePrecision.className = 'cancel grid-item';
+                            newGradePrecision.style.textDecoration = 'line-through';
+                        }
+                    }
+
+                newReferee.appendChild(newGradePrecision);
 
                 ul.appendChild(newReferee);
             }
             div.appendChild(ul);
 
-            score.innerHTML = `${sum(avgAccuracies, avgGrades)}`;
-            accuracyAvg.innerHTML = `${avgAccuracies}`;
-            gradeAvg.innerHTML = `${avgGrades}`;
+            score.innerHTML = `${sum(avgApresentation, avgPrecision)}`;
+            accuracyAvg.innerHTML = `${avgApresentation}`;
+            gradeAvg.innerHTML = `${avgPrecision}`;
 
-            localStorage.setItem('result', `${avgAccuracies},${avgGrades},${sum(avgAccuracies, avgGrades)}`);
+            localStorage.setItem('result', `${avgApresentation},${avgPrecision},${sum(avgApresentation, avgPrecision)}`);
             
             calculated = true;
             isNotShowing = false;

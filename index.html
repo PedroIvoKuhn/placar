@@ -1,73 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placar</title>
-    <script src="./scripts/index.js"></script>
-    <link rel="stylesheet" href="./css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>Árbitros</title>
 </head>
 <body>
-    <section class="section">
-        <div class="competitor">
-            <div class="name">
-                <label for="competitor">Competidor</label>
-                <input type="text" name="competitor" id="competitor">
-            </div>
-            <p class="result" id="result"> Resultado:
-            </p>
-        </div>
-        <fieldset class="grades">
-            <div class="referees">
-                <label for="referee-one">Árbitro 1</label>
-                <input type="text" name="referee-one" id="referee-one">
-                <label for="referee-two">Árbitro 2</label>
-                <input type="text" name="referee-two" id="referee-two">
-                <label for="referee-three">Árbitro 3</label>
-                <input type="text" name="referee-three" id="referee-three">
-            </div>
+    <div class="section">
+        <h1>Escolha o numero de  árbitros</h1>
+        <button onclick="numArbitro(3)">3 Árbitros</button>
+        <button onclick="numArbitro(5)">5 Árbitros</button>
+        <button onclick="numArbitro(7)">7 Árbitros</button>
+    </div>
 
-            <form id="form" class="form">
-                <div class="grade">
-                    <div>
-                        <label for="precision-one">Precisão</label>
-                        <input type="text" name="precision-one" id="precision-one">
-                    </div>
-                    <div>
-                        <label for="grade-one">Apresentação</label>
-                        <input type="text" name="grade-one" id="grade-one">
-                    </div>
-                </div>
-                <div class="grade">
-                    <div>
-                        <label for="precision-two">Precisão</label>
-                        <input type="text" name="precision-two" id="precision-two">   
-                    </div>             
-                    <div>
-                        <label for="grade-two">Apresentação</label>
-                        <input type="text" name="grade-two" id="grade-two">
-                    </div>
-                </div>
-                <div class="grade">
-                    <div>
-                        <label for="precision-three">Precisão</label>
-                        <input type="text" name="precision-three" id="precision-three">
-                    </div>
-                    <div>
-                        <label for="grade-three">Apresentação</label>
-                        <input type="text" name="grade-three" id="grade-three">
-                    </div>
-                </div>
-            </form>
-        </fieldset>
-        <div class="actions">
-            <a href="./pages/scoreboard.html" target="_blank" class="button">Placar</a>
-            <div>
-                <button id="reset" type="button" onclick="resetInputs()">Reset</button>
-                <button id="submit" type="submit" form="form">Enviar</button>
-            </div>
-        </div>
-    </section>
+    <script>
+        function numArbitro(num) {
+            window.location.href = '/pages/grades.html?arbitros=' + num;
+        }
+    </script>
 </body>
 </html>
